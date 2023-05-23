@@ -14,6 +14,7 @@
 		FA564AAD2A1A7EE900CC5088 /* Compendium_Report.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FA564AAB2A1A7EE900CC5088 /* Compendium_Report.xcdatamodeld */; };
 		FA564AAF2A1A7EEA00CC5088 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA564AAE2A1A7EEA00CC5088 /* Assets.xcassets */; };
 		FA564AB22A1A7EEA00CC5088 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA564AB02A1A7EEA00CC5088 /* LaunchScreen.storyboard */; };
+		FA564AC22A1C34D600CC5088 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA564AC12A1C34D600CC5088 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		FA564AAE2A1A7EEA00CC5088 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA564AB12A1A7EEA00CC5088 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA564AB32A1A7EEA00CC5088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA564AC12A1C34D600CC5088 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				FA564AB02A1A7EEA00CC5088 /* LaunchScreen.storyboard */,
 				FA564AB32A1A7EEA00CC5088 /* Info.plist */,
 				FA564AAB2A1A7EE900CC5088 /* Compendium_Report.xcdatamodeld */,
+				FA564AC12A1C34D600CC5088 /* SearchViewController.swift */,
 			);
 			path = "Compendium Report";
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA564AC22A1C34D600CC5088 /* SearchViewController.swift in Sources */,
 				FA564AA72A1A7EE900CC5088 /* ViewController.swift in Sources */,
 				FA564AA32A1A7EE900CC5088 /* AppDelegate.swift in Sources */,
 				FA564AAD2A1A7EE900CC5088 /* Compendium_Report.xcdatamodeld in Sources */,

@@ -31,7 +31,9 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let nib = UINib(nibName: "TableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "customCell")
         tableView.dataSource = self
         tableView.delegate = self
         searchBar.delegate = self
@@ -44,14 +46,27 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         let value = filteredData[indexPath.row]
         let key = map.first { $0.value == value }?.key ?? ""
         cell.textLabel?.text = value
         cell.detailTextLabel?.text = key
+        let addbutton = UISwitch()
+        addbutton.tag = indexPath.row
+        addbutton.addTarget(self, action: #selector(didClickButton(_:)), for: .touchUpInside)
+        cell.accessoryView = addbutton
         return cell
     }
 
+    @objc func didClickButton(_ sender: UISwitch){
+        if sender.isOn{
+            let value = filteredData[sender.tag]
+            let key = map.first { $0.value == value }?.key ?? ""
+            print(key)
+        }else{
+            print("off")
+        }
+    }
     // MARK: - UISearchBarDelegate
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

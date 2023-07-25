@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CodeListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

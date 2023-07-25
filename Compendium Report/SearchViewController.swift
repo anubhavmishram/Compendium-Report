@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
    
@@ -13,6 +14,8 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var tableView:UITableView!
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var ARCCodeModel = [ARCCode]()
     
     var map: [String: String] = [
             "2.1113": "Reduce Combustion air flow to optimum - REDUCE AIR INFILTRATION IN OVEN",
@@ -55,16 +58,33 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         addbutton.tag = indexPath.row
         addbutton.addTarget(self, action: #selector(didClickButton(_:)), for: .touchUpInside)
         cell.accessoryView = addbutton
+        addbutton.isOn = checkARCCodeExistsInDatabase(key: key)
         return cell
     }
 
     @objc func didClickButton(_ sender: UISwitch){
+        let value = filteredData[sender.tag]
+        let key = map.first { $0.value == value }?.key ?? ""
         if sender.isOn{
-            let value = filteredData[sender.tag]
-            let key = map.first { $0.value == value }?.key ?? ""
-            print(key)
+            do{
+                let code = ARCCode(context: context)
+                code.id = key
+                code.name = value
+                try context.save()
+            }catch let error as NSError{
+                print("\(error)")
+            }
         }else{
-            print("off")
+            do{
+                ARCCodeModel = try context.fetch(ARCCode.fetchRequest())
+                for result in ARCCodeModel{
+                    if(result.id == key){
+                        context.delete(result)
+                    }
+                }
+            }catch let error as NSError{
+                print("\(error)")
+            }
         }
     }
     // MARK: - UISearchBarDelegate
@@ -84,6 +104,20 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         }
 
         tableView.reloadData()
+    }
+    
+    func checkARCCodeExistsInDatabase(key: String)-> Bool{
+        do{
+            ARCCodeModel = try context.fetch(ARCCode.fetchRequest())
+            for result in ARCCodeModel{
+                if(result.id == key){
+                    return true
+                }
+            }
+        }catch let error as NSError{
+            print("\(error)")
+        }
+        return false
     }
 
 }
